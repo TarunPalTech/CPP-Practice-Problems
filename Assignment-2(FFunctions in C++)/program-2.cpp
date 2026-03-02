@@ -3,27 +3,31 @@ Problem-2: Write a function to find the highest value digit in a given number.
 */
 
 #include<iostream>
-
+#include<cstdlib>
 using namespace std;
-int findGreatestDigit(int);
+
+int highestDigit(int n){
+    n = abs(n);
+    int digit = n%10;
+    n/=10;
+    while(n){
+        if(n%10>digit){
+            digit=n%10;
+        }
+        n/=10;
+    }
+    return digit;
+}
 
 int main(){
-    int num;
-    cout<<"Enter a number:";
-    cin>>num;
-    cout<<"Greatest number is "<<findGreatestDigit(num);
+    int n;
+    cout<<"Enter a number: ";
+    cin>>n;
+    int result = highestDigit(n);
+    
+    cout<<"Highest digit is "<<result<<"!";
     return 0;
 }
-int findGreatestDigit(int num){
-    int greatest = num%10;
-    num/=10;
-    while(num>=1){
-        if(num%10>greatest){
-            greatest=num%10;
-        }
-        num/=10;
-    }
-    return greatest;
-}
+
 
 
