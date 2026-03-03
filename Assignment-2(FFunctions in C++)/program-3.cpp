@@ -3,43 +3,30 @@ Problem-3: Define a function to calculate x raised to the power y.
 */
 
 #include<iostream>
-
+#include<cstdlib>
 using namespace std;
-void calculatePower(int, int, int &);
-void calculatePower(int, int, float &);
+
+double calculatePower(double num, int p){
+    if(num==0 && p<0){
+        cerr<<"Error, Division by zero!";
+        exit(EXIT_FAILURE);
+    }
+    
+    int power = abs(p);
+    double result = 1.0;
+    while(power--){
+        result*=num;
+    }
+    
+    return p<0?1/result:result;
+}
 
 int main(){
-    int x, y;
-    int posResult;
-    float negResult;
-    cout<<"Enter a number:";
-    cin>>x;
-    cout<<"Enter a power:";
-    cin>>y;
-    if(y>=0){
-        calculatePower(x,y,posResult);
-        cout<<"Value is "<<posResult;
-    }else{
-        calculatePower(x,y,negResult);
-        cout<<"Value is "<<negResult;
-    }
+    double n;
+    int p;
+    cout<<"Enter a number and its power: ";
+    cin>>n>>p;
+    double result = calculatePower(n,p);
+    cout<<"Result is "<<result<<"!";
     return 0;
-}
-
-void calculatePower(int x, int y, int &posResult){
-    if(y==0) posResult =1;
-    else{    
-        posResult=x;
-        while(y>1){
-            posResult*=x;
-            y--;
-        }
-    }
-}
-void calculatePower(int x, int y, float &negResult){
-    negResult = 1.0;
-    while(y<0){
-        negResult/=x;
-        y++;
-    }
 }
